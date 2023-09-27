@@ -42,11 +42,18 @@ class _HomePage extends State<HomePage> {
     super.initState();
   }
 
-  ///Get the PDF document as bytes
+  ///Get the PDF document as bytes from local project asset
   void getPdfBytes() async {
     final ByteData bytes =
         await DefaultAssetBundle.of(context).load('assets/teluguchap1.pdf');
     _documentBytes = bytes.buffer.asUint8List();
+    setState(() {});
+  }
+
+  ///Get the PDF document as bytes from internet URL
+  void getPdfBytesFromWeb() async {
+    _documentBytes = await http.readBytes(Uri.parse(
+        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf'));
     setState(() {});
   }
 
